@@ -100,7 +100,7 @@ sudo apt-get remove nodejs
 sudo apt-get autoremove
 ```
 
-#开始编码
+# 开始编码
 
 1. git clone 本项目
 
