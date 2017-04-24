@@ -20,6 +20,7 @@ function HardwareRevisionCharacteristic() {
 util.inherits(HardwareRevisionCharacteristic, BlenoCharacteristic);
 
 HardwareRevisionCharacteristic.prototype.onReadRequest = function(offset, callback) {
+  console.log("HardwareRevisionCharacteristic");
   if (offset) {
     callback(this.RESULT_ATTR_NOT_LONG, null);
   } else {

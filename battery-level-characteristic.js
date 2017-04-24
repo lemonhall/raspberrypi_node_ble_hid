@@ -27,19 +27,10 @@ var BatteryLevelCharacteristic = function() {
 util.inherits(BatteryLevelCharacteristic, Characteristic);
 
 BatteryLevelCharacteristic.prototype.onReadRequest = function(offset, callback) {
-  if (os.platform() === 'darwin') {
-    exec('pmset -g batt', function (error, stdout, stderr) {
-      var data = stdout.toString();
-      // data - 'Now drawing from \'Battery Power\'\n -InternalBattery-0\t95%; discharging; 4:11 remaining\n'
-      var percent = data.split('\t')[1].split(';')[0];
-      console.log(percent);
-      percent = parseInt(percent, 10);
-      callback(this.RESULT_SUCCESS, new Buffer([percent]));
-    });
-  } else {
+    console.log("BatteryLevelCharacteristic");
     // return hardcoded value
     callback(this.RESULT_SUCCESS, new Buffer([98]));
-  }
+
 };
 
 module.exports = BatteryLevelCharacteristic;

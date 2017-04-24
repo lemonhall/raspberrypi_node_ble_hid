@@ -17,6 +17,7 @@ var ProtocolModelCharacteristic = function() {
 util.inherits(ProtocolModelCharacteristic, Characteristic);
 
 ProtocolModelCharacteristic.prototype.onReadRequest = function(offset, callback) {
+    console.log("ProtocolModelCharacteristic");
     callback(this.RESULT_SUCCESS, new Buffer([0]));
 };
 

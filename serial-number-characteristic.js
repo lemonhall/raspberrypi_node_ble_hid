@@ -7,15 +7,9 @@ var BlenoDescriptor = bleno.Descriptor;
 
 function SerialNumberCharacteristic() {
   SerialNumberCharacteristic.super_.call(this, {
-    uuid: '2a25',
+    uuid: '2a50',
     properties: ['read'],
-    value: new Buffer(233),
-    descriptors: [
-      new BlenoDescriptor({
-        uuid: '2901',
-        value: 'blink(1) serial number'
-      })
-    ]
+    value: new Buffer([0x02, 0x0000, 0x0000, 0x1234])
   });
 }
 
