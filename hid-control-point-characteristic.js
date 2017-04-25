@@ -7,12 +7,19 @@ var bleno = require('bleno');
 var Descriptor = bleno.Descriptor;
 var Characteristic = bleno.Characteristic;
 
-var HIDControlPointCharacteristic = function() {
-  HIDControlPointCharacteristic.super_.call(this, {
-    uuid: '2a4c',
-    properties: ['writeWithoutResponse'],
-    secure: ['writeWithoutResponse']
-  });
+var HIDControlPointCharacteristic = function(crypto_onoff) {
+	if(crypto_onoff){
+		  HIDControlPointCharacteristic.super_.call(this, {
+		    uuid: '2a4c',
+		    properties: ['writeWithoutResponse'],
+		    secure: ['writeWithoutResponse']
+		  });
+	}else{
+		  HIDControlPointCharacteristic.super_.call(this, {
+		    uuid: '2a4c',
+		    properties: ['writeWithoutResponse']
+		  });
+	}
 };
 
 util.inherits(HIDControlPointCharacteristic, Characteristic);

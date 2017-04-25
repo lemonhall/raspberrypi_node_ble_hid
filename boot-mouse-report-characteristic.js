@@ -7,12 +7,19 @@ var bleno = require('bleno');
 var Descriptor = bleno.Descriptor;
 var Characteristic = bleno.Characteristic;
 
-var BootMouseReportCharacteristic = function() {
-  BootMouseReportCharacteristic.super_.call(this, {
-    uuid: '2a33',
-    properties: ['read','notify'],
-    secure: ['read','notify']
-  });
+var BootMouseReportCharacteristic = function(crypto_onoff) {
+	if(crypto_onoff){
+		  BootMouseReportCharacteristic.super_.call(this, {
+		    uuid: '2a33',
+		    properties: ['read','notify'],
+		    secure: ['read','notify']
+		  });
+  	}else{
+		  BootMouseReportCharacteristic.super_.call(this, {
+		    uuid: '2a33',
+		    properties: ['read','notify']
+		  });  		
+  	}
 };
 
 util.inherits(BootMouseReportCharacteristic, Characteristic);

@@ -3,6 +3,10 @@ var util = require('util');
 var bleno = require('bleno');
 var BlenoPrimaryService = bleno.PrimaryService;
 
+//http://community.silabs.com/t5/Bluetooth-Wi-Fi/BLE113-HID-keyboard-emulation/td-p/148466
+//从silabs上找到的一篇文章
+//有gatt.xml来对照
+
 // HID Service (0x1812)
 // * Protocol Model (0x2A42)
 // * Boot Mouse Report (0x2A33)
@@ -30,20 +34,21 @@ var HIDReportMapCharacteristic	 	= require('./hid-report-map-characteristic');
 //这个应该是被写入的不管
 var HIDControlPointCharacteristic	= require('./hid-control-point-characteristic');
 
-//最后这个是三坐标
+//最后这个是三坐标 2a4d
 var HIDReportCharacteristic			= require('./hid-report-characteristic');
 
+var crypto_onoff = false;
 
 function HidService() {
   HidService.super_.call(this, {
     uuid: '1812',
     characteristics: [
-    	new ProtocolModelCharacteristic(),
-    	new BootMouseReportCharacteristic(),
-    	new HIDInformationCharacteristic(),
-    	new HIDReportMapCharacteristic(),
-    	new HIDControlPointCharacteristic(),
-    	new HIDReportCharacteristic()
+    	new ProtocolModelCharacteristic(crypto_onoff),     //2a42
+    	new BootMouseReportCharacteristic(crypto_onoff),   //2a33
+    	new HIDInformationCharacteristic(crypto_onoff),    //2a4a----call了
+    	new HIDReportMapCharacteristic(crypto_onoff),      //2a4b----call了
+    	new HIDControlPointCharacteristic(crypto_onoff),   //2a4c
+    	new HIDReportCharacteristic(crypto_onoff)          //2a4d----call了
     ]
   });
 }
